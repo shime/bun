@@ -21,8 +21,8 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "tty-spinner", "~> 0.8.0"
   spec.add_runtime_dependency "paint", "~> 2.0.1"
+  spec.add_runtime_dependency "bundler", "~> 1.16"
 
-  spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.7.0"
   spec.add_development_dependency "pry", "~> 0.11.3"
