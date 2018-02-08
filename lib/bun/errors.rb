@@ -4,4 +4,3 @@ module Bun
     class GemNotFoundError < StandardError; end
   end
 end
-
