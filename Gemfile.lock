@@ -2,8 +2,9 @@ PATH
   remote: .
   specs:
     bun (1.0.0)
-      paint (~> 2.0.1)
-      tty-spinner (~> 0.8.0)
+      bundler (~> 1.16)
+      paint (~> 2.0)
+      tty-spinner (~> 0.8)
 
 GEM
   remote: https://rubygems.org/
@@ -38,10 +39,9 @@ PLATFORMS
 
 DEPENDENCIES
   bun!
-  bundler (~> 1.16)
-  pry (~> 0.11.3)
+  pry (~> 0.11)
   rake (~> 10.0)
-  rspec (~> 3.7.0)
+  rspec (~> 3.7)
 
 BUNDLED WITH
    1.16.1
