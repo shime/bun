@@ -35,7 +35,7 @@ module Bun
         case command
         when /^install$|^i$|^add$/
           install(gems)
-        when /^uninstall$|^rm$|^d$/
+        when /^uninstall$|^rm$|^remove$|^d$/
           uninstall(gems)
         end
       end

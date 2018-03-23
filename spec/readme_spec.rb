@@ -36,6 +36,14 @@ describe "readme features" do
     end
   end
 
+  describe "remove" do
+    it "removes RSpec" do
+      run_command { `bundle exec ../bin/bun install rspec --skip-install` }
+      run_command { `bundle exec ../bin/bun uninstall rspec --skip-install` }
+      expect(File.read(gemfile)).to_not include("rspec")
+    end
+  end
+
   it "installs Pry in development" do
     run_command { `bundle exec ../bin/bun install pry --development --skip-install` }
     expect(File.read(gemfile)).to include(%Q{group :development do\n  gem "pry", "~> 0.11.3"\nend})
