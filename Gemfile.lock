@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bun (1.0.0)
+    bun (1.0.1)
       bundler (~> 1.16)
       paint (~> 2.0)
       tty-spinner (~> 0.8)
