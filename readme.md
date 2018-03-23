@@ -34,13 +34,13 @@ $ bun add rspec cucumber --test
 Uninstall RSpec:
 
 ```
-$ bun rm rspec
+$ bun remove rspec
 ```
 
 Uninstall Rails:
 
 ```
-$ bun rm rails
+$ bun remove rails
 ```
 
 Install Cuba with strict version range:
