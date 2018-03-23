@@ -16,25 +16,25 @@ $ gem install bun
 Install RSpec:
 
 ```
-$ bun install rspec
+$ bun add rspec
 ```
 
 Install Pry in development group:
 
 ```
-$ bun install pry --development 
+$ bun add pry --development 
 ```
 
 Install RSpec and Cucumber in test group:
 
 ```
-$ bun install rspec cucumber --test
+$ bun add rspec cucumber --test
 ```
 
 Uninstall RSpec:
 
 ```
-$ bun uninstall rspec
+$ bun rm rspec
 ```
 
 Uninstall Rails:
@@ -46,19 +46,19 @@ $ bun rm rails
 Install Cuba with strict version range:
 
 ```
-$ bun i cuba --strict
+$ bun add cuba --strict
 ```
 
 Add Sequel to the Gemfile and exit without installing it:
 
 ```
-$ bun i sequel --skip-install
+$ bun add sequel --skip-install
 ```
 
 Just print the gem name with the latest version found and exit:
 
 ```
-$ bun i sequel --print
+$ bun add sequel --print
 ```
 
 More info:

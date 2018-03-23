@@ -27,6 +27,15 @@ describe "readme features" do
     expect(File.read(gemfile_lock)).to include("rspec")
   end
 
+  describe "add" do
+    it "installs RSpec" do
+      run_command { `bundle exec ../bin/bun add rspec` }
+
+      expect(File.read(gemfile)).to include("rspec")
+      expect(File.read(gemfile_lock)).to include("rspec")
+    end
+  end
+
   it "installs Pry in development" do
     run_command { `bundle exec ../bin/bun install pry --development --skip-install` }
     expect(File.read(gemfile)).to include(%Q{group :development do\n  gem "pry", "~> 0.11.3"\nend})

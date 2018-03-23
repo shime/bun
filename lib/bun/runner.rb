@@ -33,7 +33,7 @@ module Bun
         install if arguments.empty?
 
         case command
-        when /^install$|^i$/
+        when /^install$|^i$|^add$/
           install(gems)
         when /^uninstall$|^rm$|^d$/
           uninstall(gems)
