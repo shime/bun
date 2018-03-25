@@ -74,6 +74,7 @@ module Bun
     def with_exception_handling
       yield
     rescue Errors::DuplicateGemError, Errors::GemNotFoundError => ex
+      puts
       puts Paint[ex.message, :red, :bright]
       exit(1)
     end

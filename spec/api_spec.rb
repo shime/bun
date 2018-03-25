@@ -17,27 +17,27 @@ describe Bun do
   end
 
   describe ".add" do
-    it "adds RSpec" do
-      run { Bun.add("rspec") }
+    it "adds bun" do
+      run { Bun.add("bun") }
 
-      expect(File.read(gemfile)).to include("rspec")
-      expect(File.read(gemfile_lock)).to include("rspec")
+      expect(File.read(gemfile)).to include("bun")
+      expect(File.read(gemfile_lock)).to include("bun")
     end
 
-    it "adds specific version of RSpec" do
-      run { Bun.add("rspec:3.7.0") }
+    it "adds specific version of bun" do
+      run { Bun.add("bun:1.1.0") }
 
-      expect(File.read(gemfile)).to include(%Q{"rspec", "~> 3.7.0"})
-      expect(File.read(gemfile_lock)).to include("rspec")
+      expect(File.read(gemfile)).to include(%Q{"bun", "~> 1.1.0"})
+      expect(File.read(gemfile_lock)).to include("bun")
     end
   end
 
   describe ".remove" do
-    it "removes RSpec" do
-      run { Bun.add("rspec:3.7.0") }
-      run { Bun.remove("rspec") }
+    it "removes bun" do
+      run { Bun.add("bun:1.1.0") }
+      run { Bun.remove("bun") }
 
-      expect(File.read(gemfile)).to_not include("rspec")
+      expect(File.read(gemfile)).to_not include("bun")
     end
   end
 end

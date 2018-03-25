@@ -4,7 +4,7 @@ require "tty/spinner"
 
 module Bun
   class VersionFetcher
-    RUBYGEMS_SEARCH_URL = "https://rubygems.org/api/v1/search.json"
+    RUBYGEMS_GEM_URL = "https://rubygems.org/api/v1/gems"
 
     def initialize(gem, arguments)
       @gem = gem
@@ -15,16 +15,8 @@ module Bun
       version = nil
 
       with_optional_spinner do
-        response = open("#{RUBYGEMS_SEARCH_URL}?query=#{gem}").read
-        json_response = JSON.parse(response)
-        latest_gem_attributes = json_response.
-          find {|attributes| attributes["name"] == gem }
-
-        unless latest_gem_attributes
-          raise ::Bun::Errors::GemNotFoundError.new("Aborting. Gem not found: #{gem}")
-        end
-
-        version = latest_gem_attributes["version"]
+        json_response = JSON.parse(fetch)
+        version = json_response["version"]
       end
 
       version
@@ -42,6 +34,12 @@ module Bun
     end
 
     private
+
+    def fetch
+      open("#{RUBYGEMS_GEM_URL}/#{gem}.json").read
+    rescue OpenURI::HTTPError
+      raise ::Bun::Errors::GemNotFoundError.new("Aborting. Gem not found: #{gem}")
+    end
 
     attr :gem
     attr :arguments
