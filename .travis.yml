@@ -7,6 +7,6 @@ rvm:
   - 2.3.6
   - 2.4.3
   - 2.5.0
-script: bundle exec rake
+script: BUNDLE_GEMFILE=gemfile bundle exec rake
 notifications:
   email: false
