@@ -1,7 +1,7 @@
 require "spec_helper"
 require_relative "../lib/bun"
 
-describe "readme features" do
+describe "CLI" do
   let(:gemfile) { "tmp/Gemfile" }
   let(:gemfile_lock) { "tmp/Gemfile.lock" }
 
@@ -32,7 +32,6 @@ describe "readme features" do
       run_command { `bundle exec ../bin/bun add rspec --skip-install` }
 
       expect(File.read(gemfile)).to include("rspec")
-      expect(File.read(gemfile_lock)).to include("rspec")
     end
 
     it "installs specific version of Rails" do
