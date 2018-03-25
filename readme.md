@@ -1,5 +1,7 @@
 # Bun
 
+[![Build Status](https://travis-ci.org/shime/bun.svg?branch=master)](https://travis-ci.org/shime/bun)
+
 Bundler's little helper. A missing CLI tool to install and remove gems from Gemfile with ease.
 
 
