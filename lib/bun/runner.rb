@@ -9,20 +9,19 @@ module Bun
 
     def initialize(*arguments)
       @arguments = arguments
+      @gemfile = Gemfile.new
+
+      parse_arguments
     end
 
     def call
-      parse_arguments 
-
       command = parsed_arguments.shift
       gems = parsed_arguments.take_while { |argument| argument !~ /^-|^--/}
-
-      self.gemfile = Gemfile.new
 
       run_command(command, gems)
     end
 
-    def uninstall(gems)
+    def uninstall(gems, opts: {})
       gems.each do |gem|
         gemfile.remove(gem)
       end
@@ -37,7 +36,7 @@ module Bun
       gems.each do |gem|
         name, version = extract_name_and_version_from_gem(gem)
 
-        if arguments.print? 
+        if print?
           version ||= VersionFetcher.new(name, arguments).fetch_latest_version
           puts "gem \"#{name}\", \"#{version_string(version)}\"" 
         else
@@ -90,18 +89,22 @@ module Bun
     end
 
     def bundle_install
-      return if arguments.skip_install? || arguments.print?
+      return if arguments.skip_install? || print?
 
       Bundler.with_clean_env do
         system("bundle install")
       end
     end
 
+    def print?
+      arguments.print?
+    end
+
     def parse_arguments
       self.arguments = Arguments.new(arguments)
       self.parsed_arguments = arguments.parse
     end
-    
+
     def extract_name_and_version_from_gem(gem)
       return gem unless gem =~ /:/
 

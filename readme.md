@@ -73,6 +73,15 @@ More info:
 $ bun --help
 ```
 
+# API
+
+```ruby
+require "bun"
+
+Bun.add("rspec:3.7.0") # adds RSpec to Gemfile and runs bundle install
+Bun.remove("rspec")    # removes RSpec from Gemfile
+```
+
 ## Prior art
 
 * [Gemrat](https://github.com/drurly/gemrat)
