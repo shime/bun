@@ -22,6 +22,37 @@ module Bun
       run_command(command, gems)
     end
 
+    def uninstall(gems)
+      gems.each do |gem|
+        gemfile.remove(gem)
+      end
+
+      bundle_install
+    end
+    alias :remove :uninstall
+
+    def install(gems = [], opts: {})
+      gemfile.init
+
+      gems.each do |gem|
+        name, version = extract_name_and_version_from_gem(gem)
+
+        if arguments.print? 
+          version ||= VersionFetcher.new(name, arguments).fetch_latest_version
+          puts "gem \"#{name}\", \"#{version_string(version)}\"" 
+        else
+          gemfile.verify_unique!(name)
+          version ||= VersionFetcher.new(name, arguments).fetch_latest_version
+          gemfile.add(name,
+                      version_string(version),
+                      arguments.group)
+        end
+      end
+
+      bundle_install
+    end
+    alias :add :install
+
     private
 
     attr_accessor :arguments
@@ -48,32 +79,6 @@ module Bun
       exit(1)
     end
 
-    def uninstall(gems)
-      gems.each do |gem|
-        gemfile.remove(gem)
-      end
-
-      bundle_install
-    end
-
-    def install(gems = [])
-      gemfile.init
-
-      gems.each do |gem|
-        if arguments.print? 
-          version = version_string(VersionFetcher.new(gem, arguments).fetch_latest_version)
-          puts "gem \"#{gem}\", \"#{version}\"" 
-        else
-          gemfile.verify_unique!(gem)
-          gemfile.add(gem,
-                      version_string(VersionFetcher.new(gem, arguments).fetch_latest_version),
-                      arguments.group)
-        end
-      end
-
-      bundle_install
-    end
-
     def version_string(version)
       if arguments.optimistic?
         ">= #{version}"
@@ -95,6 +100,12 @@ module Bun
     def parse_arguments
       self.arguments = Arguments.new(arguments)
       self.parsed_arguments = arguments.parse
+    end
+    
+    def extract_name_and_version_from_gem(gem)
+      return gem unless gem =~ /:/
+
+      gem.split(":")
     end
   end
 end

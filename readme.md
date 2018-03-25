@@ -19,6 +19,12 @@ Install RSpec:
 $ bun add rspec
 ```
 
+Install specific version of RSpec
+
+```
+$ bun add rspec:3.7.0
+```
+
 Install Pry in development group:
 
 ```

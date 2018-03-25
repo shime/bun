@@ -29,10 +29,16 @@ describe "readme features" do
 
   describe "add" do
     it "installs RSpec" do
-      run_command { `bundle exec ../bin/bun add rspec` }
+      run_command { `bundle exec ../bin/bun add rspec --skip-install` }
 
       expect(File.read(gemfile)).to include("rspec")
       expect(File.read(gemfile_lock)).to include("rspec")
+    end
+
+    it "installs specific version of Rails" do
+      run_command { `bundle exec ../bin/bun add rails:5.0.0 --skip-install` }
+
+      expect(File.read(gemfile)).to include(%Q{"rails", "~> 5.0.0"})
     end
   end
 
