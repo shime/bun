@@ -1,5 +1,6 @@
 sudo: false
 language: ruby
+cache: bundler
 rvm:
   - 2.0.0
   - 2.1.10
@@ -7,7 +8,9 @@ rvm:
   - 2.3.6
   - 2.4.3
   - 2.5.0
-install: BUNDLE_GEMFILE=gemfile bundle install
-script: BUNDLE_GEMFILE=gemfile bundle exec rake
+env:
+  TASK=bundle install
+  TASK=bundle exec rake
+script: BUNDLE_GEMFILE=gemfile $TASK
 notifications:
   email: false
